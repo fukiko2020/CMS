@@ -4,7 +4,7 @@ session_start();
 session_regenerate_id(true);
 if (isset($_SESSION["login"]) === false) {
     print "ログインしていません。<br><br>";
-    print "<a href='set_login.php'>ログイン画面へ</a>";
+    print "<a href='login.php'>ログイン画面へ</a>";
     exit();
 }
 ?>
@@ -76,7 +76,7 @@ if (isset($_SESSION["login"]) === false) {
     ?>
 
     親メニューを追加しました。<br><br>
-    <a href="p_menu_add.php">親メニューへ</a>
+    <a href="p_menu_add.php">親メニュー一覧へ</a>
     <br>
     <a href="cms_top.php">トップメニューへ</a>
 
