@@ -24,8 +24,8 @@ if (isset($_SESSION["login"]) === false) {
     <a href="parent_menu_add.php">親カテゴリ追加</a>
     <a href="child_menu_add.php">子カテゴリ追加</a>
     <h2>記事投稿</h2>
-    <a href="edit_post.php">新規記事作成</a>
-    <a href="edit_kotei.php">固定ページ作成</a>
+    <a href="../edit_post.php">新規記事作成</a>
+    <a href="../edit_kotei.php">固定ページ作成</a>
     <h2>プロフィール</h2>
     <a href="edit_profile.php">プロフィール編集</a>
     <h2>コメント</h2>

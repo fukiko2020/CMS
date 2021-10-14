@@ -4,7 +4,7 @@ session_start();
 session_regenerate_id(true);
 if (isset($_SESSION["login"]) === false) {
     print "ログインしていません。<br><br>";
-    print "<a href='setting/login.php'>ログイン画面へ</a>";
+    print "<a href='cms/login.php'>ログイン画面へ</a>";
     exit();
 }
 ?>
@@ -21,7 +21,7 @@ if (isset($_SESSION["login"]) === false) {
 <body>
 <?php
 try {
-    require_once("../common/local_settings.php");
+    require_once("common/local_settings.php");
 
     $dsn = "mysql:host=localhost;dbname=blog;charset=utf8";
     $user = "root";
@@ -49,7 +49,7 @@ try {
 <h1>記事作成</h1>
 <div id="edit">
     <div id="box2">
-        <form action="upload.php" method="post" enctype="multipart/form-data">
+        <form action="cms/upload.php" method="post" enctype="multipart/form-data">
             <h2>画像ファイルアップロード</h2>
             <input type="file" name="image_data[]" multiple="multiple">
             <input type="submit" value="アップロード">
@@ -76,7 +76,7 @@ try {
                 <div id="br">br　</div>
                 <div id="h2">h2　</div>
                 <div id="img">img　</div>
-                <a href="choose_img.php" target="blank">imgファイル名検索</a>
+                <a href="cms/choose_img.php" target="blank">imgファイル名検索</a>
             </div>
 
             <textarea id="content" name="content"></textarea>
@@ -96,7 +96,7 @@ try {
     </div>
 </div>
 
-<script src="js/edit.js"></script>
+<script src="cms/js/edit.js"></script>
 </body>
 
 
