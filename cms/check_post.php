@@ -36,6 +36,7 @@ if (isset($_SESSION["login"]) === false) {
     }
 
     print $title;
+    print $category;
     print "<img class='content_img' src='img/" . $img . "'>";
     print $content;
 
