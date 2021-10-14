@@ -29,7 +29,7 @@ if (isset($_SESSION["login"]) === false) {
     <h2>プロフィール</h2>
     <a href="edit_profile.php">プロフィール編集</a>
     <h2>コメント</h2>
-    <a href="comment_check.php">コメント認証・削除</a>
+    <a href="check_comment.php">コメント認証・削除</a>
     <a href="comment_list.php">コメントリスト・返信</a>
     <h2>ログアウト</h2>
     <a href="logout.php">ログアウト</a>
