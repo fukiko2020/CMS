@@ -10,16 +10,18 @@
             require_once("common/common.php");
             require_once("common/local_settings.php");
 
-            // ページネーション
-            if (empty($_GET["page"]) === true) {
+            $get = sanitize($_GET);
+
+            $category = $get["category"];
+            $card_max = 5;
+
+            if (empty($get["page"]) == true) {
                 $page = 1;
             } else {
-                $get = sanitize($_GET);
-                $page = $get["page"];  // 現在いるページ番号
+                $page = $get["page"];
             }
 
-            $now = $page - 1;  // 現在のページ-1
-            $card_max = 5;  // 1ページに表示させる記事の上限
+            $now = $page - 1;
 
             $dsn = "mysql:host=localhost;dbname=blog;charset=utf8";
             $user = "root";
@@ -27,9 +29,11 @@
             $dbh = new PDO($dsn, $user, $password);
             $dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-            $sql = "SELECT title FROM post WHERE1";
+            $sql = "SELECT title FROM post WHERE category=?";
             $stmt = $dbh->prepare($sql);
-            $stmt->execute();
+            $data[] = $category;
+            $stmt->execute($data);
+            $data = array();
 
             while (true) {
                 $rec = $stmt->fetch(PDO::FETCH_ASSOC);
@@ -41,33 +45,36 @@
 
             if (isset($title) === true) {
 
-                $card_all = count($title);  // 投稿記事のトータル数
-                $page_max = ceil($card_all / $card_max);  // ページ数
+                $card_all = count($title);
+                $page_max = ceil($card_all / $card_max);
 
                 if ($page === 1) {
-                    $sql = "SELECT id, category, img, title, created_at FROM post ORDER BY id DESC LIMIT $now, $card_max";
+                    $sql = "SELECT id, category, img, title, time FROM post WHERE category=? ORDER BY id DESC LIMIT $now, $card_max";
                     $stmt = $dbh->prepare($sql);
-                    $stmt->execute();
+                    $data[] = $category;
+                    $stmt->execute($data);
                 } else {
                     $now = $now * $card_max;
-                    $sql = "SELECT id, category, img, title, created_at FROM post ORDER BY id DESC LIMIT $now, $card_max";
+                    $sql = "SELECT id, category, img, title, time FROM post WHERE category=? ORDER BY id DESC LIMIT $now, $card_max";
                     $stmt = $dbh->prepare($sql);
-                    $stmt->execute();
+                    $data[] = $category;
+                    $stmt->execute($data);
                 }
-
+                $data = array();
+                $dbh = null;
                 while (true) {
                     $rec = $stmt->fetch(PDO::FETCH_ASSOC);
                     if (empty($rec["title"]) === true) {
                         break;
                     }
                     print "<div id='blog_card'>";
-                    print "<a class='card' href='post.php?id=" . $rec['id'] . "'>";
+                    print "<a class='card' href='post.php?id=" . $rec['id'] . "&category=" . $rec['category'] . "'>";
                     print "<div id='main_img'>";
                     print "<img src='cms/img/" . $rec['img'] . "'>";
                     print "</div>";
                     print "<div id='main_text'>";
                     print "カテゴリ　" . $rec["category"] . "<br>";
-                    print "更新日　" . $rec["created_at"] . "<br>";
+                    print "更新日時　" . $rec["time"] . "<br>";
                     print "<div class='card_title'>";
                     print strip_tags($rec["title"]) . "</div><br>";
                     print "</div>";
@@ -78,21 +85,17 @@
                 print "<div class='pag'>";
                 for ($i = 1; $i <= $page_max; $i++) {
                     if ($i == $page) {
-                        // 今いるページにはリンクなし
                         print "<div class='posi'>" . $page . "</div>";
                     } else {
-                        // 別ページにはリンク付き
-                        print "<div class='posi'><a href='index.php?page=" . $i . "'>";
+                        print "<div class='posi'><a href='category.php?page=" . $i . "&category=" . $category . "'>";
                         print $i . "</a></div>";
                     }
                 }
                 print "</div>";
             } else {
                 print "<br><br>";
-                print "記事はありません。";
+                print "記事がありません。";
             }
-
-            $dbh = null;
         } catch (Exception $e) {
             print "異常";
             print $e;
