@@ -14,7 +14,7 @@ if (isset($_SESSION["login"]) === false) {
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>cms</title>
+    <title>cms - コメント認証・削除</title>
     <link rel="stylesheet" href="style.css">
 </head>
 
@@ -36,7 +36,7 @@ if (isset($_SESSION["login"]) === false) {
         $stmt->execute();
 
         $rec = $stmt->fetch(PDO::FETCH_ASSOC);
-        var_dump($rec);
+        // var_dump($rec);
 
         if (empty($rec["name"]) === true) {
             print "認証待ちのコメントはありません。<br><br>";
@@ -45,7 +45,8 @@ if (isset($_SESSION["login"]) === false) {
             exit();
         }
         print "以下のコメントが認証待ちになっています。<br><br>";
-        print $rec["post_title"] . " に対するコメント<br>";
+        $title_untaged = strip_tags($rec["post_title"]);
+        print $title_untaged. " に対するコメント<br>";
         print "投稿日時: ".$rec["created_at"];
         print "<br>";
         print "投稿者: ".$rec["name"];

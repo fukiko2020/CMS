@@ -20,6 +20,8 @@ if (isset($_SESSION["login"]) === false) {
 </head>
 <body>
     <h1>CMS TOP</h1>
+    <h2>サイトを見る</h2>
+    <a href="../index.php">http://example.com</a>
     <h2>カテゴリー追加</h2>
     <a href="parent_menu_add.php">親カテゴリ追加</a>
     <a href="child_menu_add.php">子カテゴリ追加</a>

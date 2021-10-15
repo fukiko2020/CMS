@@ -24,10 +24,12 @@ if (isset($_SESSION["login"]) === false) {
 
     try {
 
-        $category = $_POST["category"];
+        $category = empty($_POST["category"]) === true ? null : $_POST["category"];
         $title = $_POST["title"];
         $content = $_POST["content"];
-        $img = $_POST["img"];
+        $img = empty($_POST["img"]) === true ? null : $_POST["img"];
+        var_dump($_POST["img"]);
+        var_dump($img);
         $enable_comment = $_POST["enable_comment"];
         if (empty($enable_comment) === true) {
             $enable_comment = 0;
@@ -39,13 +41,14 @@ if (isset($_SESSION["login"]) === false) {
         $dbh = new PDO($dsn, $user, $password);
         $dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-        $sql = "INSERT INTO kotei(category, title, content, img, comment) VALUES(?,?,?,?)";
+        $sql = "INSERT INTO kotei(category, title, content, img, comment) VALUES(?,?,?,?, ?)";
         $stmt = $dbh->prepare($sql);
         $data[] = $category;
         $data[] = $title;
         $data[] = $content;
         $data[] = $img;
         $data[] = $enable_comment;
+
         $stmt->execute($data);
     } catch (Exception $e) {
         print "只今障害が発生しております。<br><br>";

@@ -31,7 +31,6 @@ if (isset($_SESSION["login"]) === false) {
         $name = $post["name"];
         $reply = $post["reply"];
         $post_id = $post["post_id"];
-        print $post_id."←post_id";
         $id = $post["id"];
 
 
@@ -41,7 +40,7 @@ if (isset($_SESSION["login"]) === false) {
         $dbh = new PDO($dsn, $user, $password);
         $dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-        $sql = "UPDATE comment SET replied=? WHERE post_id=? && id=?";
+        $sql = "UPDATE comment SET replied=? WHERE post_id=? AND id=?";
         $stmt = $dbh->prepare($sql);
         $data[] = "1";
         $data[] = $post_id;
@@ -49,12 +48,13 @@ if (isset($_SESSION["login"]) === false) {
         $stmt->execute($data);
         $data = array();
 
-        $sql = "INSERT INTO comment(name, content, post_id, replied) VALUES(?,?,?,?)";
+        $sql = "INSERT INTO comment(name, content, post_id, replied, permitted) VALUES(?,?,?,?,?)";
         $stmt = $dbh->prepare($sql);
         $data[] = $name;
         $data[] = $reply;
         $data[] = $post_id;
-        $data[] = "0";
+        $data[] = "1";
+        $data[] = "1";
         $stmt->execute($data);
 
         $dbh = null;
