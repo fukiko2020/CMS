@@ -15,7 +15,7 @@ if (isset($_SESSION["login"]) === false) {
 <head>
     <meta charset="utf-8">
     <title>cms - プロフィール編集</title>
-    <link rel="stylesheet" href="style2.css">
+    <link rel="stylesheet" href="css/edit.css">
 </head>
 
 <body>

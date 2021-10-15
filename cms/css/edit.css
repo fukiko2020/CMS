@@ -1,0 +1,39 @@
+#edit {
+display: flex;
+}
+.tag {
+    display: flex;
+}
+#box {
+    width: 100%;
+    height: 80vh;
+    padding: 10px;
+    margin: 10px;
+    border: solid 1px;
+    overflow: scroll;
+}
+#area {
+    width: 440px;
+    height: 75vh;
+    padding: 10px;
+    margin: 10px;
+}
+#title {
+    width: 100%;
+    height: 10vh;
+    padding: 10px;
+    margin: 10px;
+    border: solid 1px;
+    overflow: scroll;
+}
+#sam {
+    width: 100%;
+    height: 15vh;
+    padding: 10px;
+    margin: 10px;
+    border: solid 1px;
+    overflow: scroll;
+}
+#write {
+    width: 1000px;
+}

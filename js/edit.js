@@ -1,4 +1,4 @@
-const img_tag = "<img src='img/";
+const img_tag = "<img src='cms/img/";
 const close_tag = "'>";
 
 function addTag(tag) {
