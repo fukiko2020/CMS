@@ -47,57 +47,82 @@ if (isset($_SESSION["login"]) === false) {
     }
     ?>
     <h1>記事作成</h1>
-    <div id="edit">
-        <div id="box2">
-            <form action="cms/upload.php" method="post" enctype="multipart/form-data">
-                <h2>画像ファイルアップロード</h2>
-                <input type="file" name="image_data[]" multiple="multiple">
-                <input type="submit" value="アップロード">
-            </form>
-            <br>
-            <form action="check_kotei.php" method="post" enctype="multipart/form-data">
-                <h2>カテゴリ</h2>
-                <select name='category'>
-                    <option value=""></option>
-                    <?php foreach ($c_menu_name as $key => $value) {; ?>
-                        <option value='<?php print $key; ?>'><?php print $value; ?></option>
-                    <?php }; ?>
-                </select>
-                <h2>タイトル</h2>
-                <textarea name="title" id="title"><h1></h1></textarea>
-                <br>
-                <h2>サムネイル</h2>
-                <input type="text" id="thumbnail_name" name="img">
-                <input type="button" id="thumbnail_btn" value="ok">
-                <br><br>
-                <input type="radio" name="enable_comment" value="1">問い合わせフォームあり
-                <input type="radio" name="enable_comment" value="0">問い合わせフォームなし
+    <div class="contents__wrapper">
 
-                <div class="tag">
-                    <div id="h1">h1　</div>
-                    <div id="p">p　</div>
-                    <div id="br">br　</div>
-                    <div id="h2">h2　</div>
-                    <div id="img">img　</div>
-                    <a href="cms/choose_img.php" target="blank">imgファイル名検索</a>
+        <div id="edit" class="edit-form__wrapper">
+            <!-- <div id="box2"> -->
+            <form action="check_kotei.php" method="post" enctype="multipart/form-data">
+                <div class="form-item__wrapper">
+                    <div>タイトル *</div>
+                    <textarea name="title" class="form__title" id="title" rows="1"><h1></h1></textarea>
                 </div>
 
-                <textarea id="content" name="content"></textarea>
-                <br>
-                <input type="submit" value="確認画面へ">
-                <input type="button" onclick="history.back()" value="戻る">
+                <div class="form-item__wrapper">
+                    <div>カテゴリ *</div>
+                    <select name='category' class="form__category">
+                        <option value=""></option>
+                        <?php foreach ($c_menu_name as $key => $value) {; ?>
+                            <option value='<?php print $key; ?>'><?php print $value; ?></option>
+                        <?php }; ?>
+                    </select>
+                </div>
+
+                <div class="form-item__wrapper">
+                    <div>サムネイル</div>
+                    <input type="text" id="thumbnail_name" name="img">
+                    <input type="button" id="thumbnail_btn" value="決定">
+                </div>
+
+                <div class="form-item__wrapper">
+                    <div>
+                        <input type="radio" name="enable_comment" value="1">問い合わせフォームあり
+                    </div>
+                    <div>
+                        <input type="radio" name="enable_comment" value="0">問い合わせフォームなし
+                    </div>
+                </div>
+
+                <div class="form-item__wrapper">
+                    <div>本文 *</div>
+                    <div class="form-tag__wrapper">
+                        <div id="h1">&lt;h1&gt;</div>
+                        <div id="p">&lt;p&gt;</div>
+                        <div id="br">&lt;br&gt;</div>
+                        <div id="h2">&lt;h2&gt;</div>
+                        <div id="img">&lt;img&gt;</div>
+                        <a href="cms/choose_img.php" target="blank">アップロード済画像ファイル名を検索</a>
+                    </div>
+                    <textarea class="form__content" id="content" name="content"></textarea>
+                </div>
+
+                <div class="form__btns">
+                    <!-- <input type="submit" value="確認画面へ"> -->
+                    <!-- <input type="button" onclick="history.back()" value="戻る"> -->
+                    <button type="button" onclick="history.back();" class="form__btns--white">戻る</button>
+                    <button type="submit" class="form__btns--green">確認画面へ</button>
+                </div>
+            </form>
+            <form action="cms/upload.php" method="post" enctype="multipart/form-data">
+                <div class="form-item__wrapper">
+                    <div>画像ファイルアップロード</div>
+                    <input type="file" name="image_data[]" multiple="multiple">
+                    <input type="submit" value="アップロード">
+                </div>
             </form>
         </div>
-        <div id="write">
-            <h3>タイトル</h3>
+
+        <!-- プレビュー -->
+        <div id="preview__wrapper">
+            <div class="form-item__wrapper">
+                <div>プレビュー</div>
+            </div>
             <div id="show_title"></div>
-            <h3>サムネイル</h3>
             <div id="show_img"></div>
-            <h3>本文</h3>
             <div id="show_content"></div>
 
         </div>
     </div>
+    </div> <!-- contents__wrapper -->
 
     <script src="js/edit.js"></script>
 </body>
