@@ -15,7 +15,7 @@ if (isset($_SESSION["login"]) === false) {
 <head>
     <meta charset="utf-8">
     <title>cms - 固定記事作成</title>
-    <link rel="stylesheet" href="cms/css/edit.css">
+    <link rel="stylesheet" href="css/edit.css">
 </head>
 
 <body>
