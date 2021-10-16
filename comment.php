@@ -1,88 +1,100 @@
-<?php require_once("parts/header.php"); ?>
-<wrapper>
-    <main>
+<!DOCTYPE html>
+<html lang="ja">
 
-        <?php require_once("parts/pankuzu.php"); ?>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>my blog</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
 
-        <?php
-        try {
+<body class="body__container">
 
-            require_once("common/common.php");
-            require_once("common/local_settings.php");
+    <?php require_once("parts/header.php"); ?>
+    <wrapper>
+        <main>
 
-            $post = sanitize($_POST);
+            <?php require_once("parts/pankuzu.php"); ?>
 
-            $name = $post["name"];
-            $comment = $post["comment"];
-            $id = $post["id"];
-            $title = $post["title"];
-            // 今回の設計上、改行があると次ページへ遷移できないため改行を削除
-            $comment = str_replace(PHP_EOL, '', $comment);
+            <?php
+            try {
 
-            if (empty($name) === true or empty($comment) === true) {
-                print "<br><br>";
-                print "名前かコメントが空白です。";
-                print "<br><br>";
-                print "<form>";
-                print "<input type='button' onclick='history.back()' value='戻る'>";
-                print "</form>";
-            } else {
+                require_once("common/common.php");
+                require_once("common/local_settings.php");
 
-                $title = strip_tags($title);
+                $post = sanitize($_POST);
 
-                $dsn = "mysql:host=localhost;dbname=blog;charset=utf8";
-                $user = "root";
-                $password = $db_password;
-                $dbh = new PDO($dsn, $user, $password);
-                $dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+                $name = $post["name"];
+                $comment = $post["comment"];
+                $id = $post["id"];
+                $title = $post["title"];
+                // 今回の設計上、改行があると次ページへ遷移できないため改行を削除
+                $comment = str_replace(PHP_EOL, '', $comment);
 
-                $sql = "INSERT INTO comment(name, content, post_id) VALUES(?,?,?)";
-                $stmt = $dbh->prepare($sql);
-                $data[] = $name;
-                $data[] = $comment;
-                $data[] = $id;
-                var_dump($data);
-                $stmt->execute($data);
-                print "これはデバッグプリントです";
-                $data = array();
+                if (empty($name) === true or empty($comment) === true) {
+                    print "<br><br>";
+                    print "名前かコメントが空白です。";
+                    print "<br><br>";
+                    print "<form>";
+                    print "<input type='button' onclick='history.back()' value='戻る'>";
+                    print "</form>";
+                } else {
 
-                $dbh = null;
+                    $title = strip_tags($title);
 
-                print "<br><br>";
-                print "コメントを送信しました。<br>";
-                print "コメントは認証後に反映されます。<br><br>";
-                print "<a href='post.php?n=" . $id . "'>";
-                print "戻る";
-                print "</a>";
+                    $dsn = "mysql:host=localhost;dbname=blog;charset=utf8";
+                    $user = "root";
+                    $password = $db_password;
+                    $dbh = new PDO($dsn, $user, $password);
+                    $dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-                $bun = "";
-                $bun .= $name . "様よりコメント\n\n";
-                $bun .= $title . "　の記事\n\n";
-                $bun .= $comment . "\n\n下記URLよりログインして認証可否して下さい。\n\n";
-                $bun .= "https://masimaro-comp.com/cms/login.php";
+                    $sql = "INSERT INTO comment(name, content, post_id) VALUES(?,?,?)";
+                    $stmt = $dbh->prepare($sql);
+                    $data[] = $name;
+                    $data[] = $comment;
+                    $data[] = $id;
+                    var_dump($data);
+                    $stmt->execute($data);
+                    print "これはデバッグプリントです";
+                    $data = array();
 
-                //print "<br>";
-                //print nl2br($bun);
+                    $dbh = null;
 
-                $title = "コメントが入りました。";
-                $header = "From:" . $name;
-                $content = html_entity_decode($bun, ENT_QUOTES, "UTF-8");
-                mb_language("Japanese");
-                mb_internal_encoding("UTF-8");
-                mb_send_mail($email, $title, $bun, $header);
+                    print "<br><br>";
+                    print "コメントを送信しました。<br>";
+                    print "コメントは認証後に反映されます。<br><br>";
+                    print "<a href='post.php?n=" . $id . "'>";
+                    print "戻る";
+                    print "</a>";
+
+                    $bun = "";
+                    $bun .= $name . "様よりコメント\n\n";
+                    $bun .= $title . "　の記事\n\n";
+                    $bun .= $comment . "\n\n下記URLよりログインして認証可否して下さい。\n\n";
+                    $bun .= "https://masimaro-comp.com/cms/login.php";
+
+                    //print "<br>";
+                    //print nl2br($bun);
+
+                    $title = "コメントが入りました。";
+                    $header = "From:" . $name;
+                    $content = html_entity_decode($bun, ENT_QUOTES, "UTF-8");
+                    mb_language("Japanese");
+                    mb_internal_encoding("UTF-8");
+                    mb_send_mail($email, $title, $bun, $header);
+                }
+            } catch (Exception $e) {
+                print "異常";
+                print $e;
+                exit();
             }
-        } catch (Exception $e) {
-            print "異常";
-            print $e;
-            exit();
-        }
-        ?>
+            ?>
 
 
 
 
-        <?php require_once("parts/nav.php"); ?>
+            <?php require_once("parts/nav.php"); ?>
 
-    </main>
-    <?php require_once("parts/side.php"); ?>
-    <?php require_once("parts/footer.php"); ?>
+        </main>
+        <?php require_once("parts/side.php"); ?>
+        <?php require_once("parts/footer.php"); ?>
