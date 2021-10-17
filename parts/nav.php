@@ -1,10 +1,12 @@
-<nav id="menu" class="close">
-
-    <h3>カテゴリー</h3>
+<!-- <nav id="menu" class="close"> -->
+<div id="hamburger" class="menu-btn close"><span></span></div>
+<nav id="nav">
+    <h3>カテゴリー!!!</h3>
 
     <?php
     try {
         require_once("common/local_settings.php");
+
         $dsn = "mysql:host=localhost;dbname=blog;charset=utf8";
         $user = "root";
         $password = $db_password;
@@ -14,7 +16,6 @@
         $sql = "SELECT name, id FROM p_menu WHERE1";
         $stmt = $dbh->prepare($sql);
         $stmt->execute();
-        // var_dump($p_id);
 
         while (true) {
             $rec = $stmt->fetch(PDO::FETCH_ASSOC);
@@ -30,9 +31,11 @@
             // php 形式の値をJSONに変換してJSに渡す（JSで各メニューのIDに合わせてクリックイベントを生成するため）
             $maxval = json_encode($max);
 
+            print "<ul class='slidebar__wrapper>";
+
             for ($i = 0; $i < $max; $i++) {
                 $n = $i + 1;
-                print "<div id='menu$n'>" . $p_category_name[$i] . "</div>";
+                print "<li id='slidebar$n'>" . $p_category_name[$i] . "</li>";
 
                 $id = $p_id_list[$i];
 
@@ -42,30 +45,31 @@
                 $data[] = $id;
                 $stmt->execute($data);
 
-                print "<ul id='menuopen$n'>";
+                print "<ul id='slide-bar_open$id'>";
 
                 while (true) {
                     $rec2 = $stmt->fetch(PDO::FETCH_ASSOC);
                     if (empty($rec2["name"]) === false) {
                         //print "<li>".$rec2['name']."</li>";
-                        print "<a href='category.php?category=" . $rec2['name'] . "'>";
-                        print "<li>" . $rec2['name'] . "</li>";
-                        print "</a>";
+                        print "<li class='bar-child'><a href='category.php?category=" . $rec2['name'] . "'>";
+                        print $rec2['name'] . "</a></li>";
                     } else {
-                        print "</ul>";
-                        $data = array();
+                        // print "</ul>";
+                        // $data = array();
                         break 1;
                     }
                 }
+                $data = array();
+                print "</ul>";
             }
+            print "</li>";
             $p_category_name = array();
             $p_id_list = array();
         } else {
             $maxval = json_encode(999);
         }
 
-        print "<br>";
-        print "<h3>メニュー</h3>";
+        print "<h3>固定ページ</h3>";
         $sql = "SELECT title, id FROM kotei WHERE1";
         $stmt = $dbh->prepare($sql);
         $stmt->execute();
@@ -75,9 +79,10 @@
             if (empty($rec3["title"]) === true) {
                 break;
             }
-            print "<a href='page.php?kotei=" . $rec3['id'] . "'>";
+            $max += 1;
+            print "<li id=slidebar$max class='nav-parent'><a href='kotei.php?kotei=" . $rec3['id'] . "'>";
             print strip_tags($rec3["title"]);
-            print "</a>";
+            print "</a></li>";
             print "<br>";
         }
 

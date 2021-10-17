@@ -12,7 +12,7 @@
 
     <?php require_once("parts/header.php"); ?>
     <wrapper>
-        <main>
+        <div class="main__wrapper">
 
             <?php require_once("parts/pankuzu.php"); ?>
 
@@ -117,6 +117,6 @@
 
             <?php require_once("parts/nav.php"); ?>
 
-        </main>
+        </div>  <!-- main -->
         <?php require_once("parts/side.php"); ?>
         <?php require_once("parts/footer.php"); ?>
