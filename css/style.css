@@ -7,16 +7,68 @@ body {
 .body__container {
   position: relative;
   padding-bottom: 150px;
+  margin: 0 30px;
 }
 
+/* ヘッダー */
 .header__container {
   display: inline;
 }
 
-.header__title, .header__subtitle {
-  text-align: center;
+/* ヘッダー navバー */
+.nav-parent__wrapper {
+  list-style: none;
+  margin: 0;
 }
 
+.nav-parent {
+  display: inline-block;
+  padding: 5px 0;
+  vertical-align: top;
+  position: relative;
+  transition: all .2s linear .2s;
+}
+
+.nav-parent a {
+  display: block;
+  padding: 0 1.5em;
+  text-decoration: none;
+}
+
+.nav-parent:hover {
+  background-color: azure;
+}
+
+.nav-parent:hover > a {
+  border-bottom: 1px solid #333333;
+}
+
+.nav-child__wrapper {
+  width: 5em;
+  list-style: none;
+  visibility: hidden;
+  transition: all .2s linear .2s;
+}
+
+.nav-child {
+  display: block;
+  white-space: nowrap;
+}
+
+.nav-child a {
+  position: relative;
+  top: 0;
+  left: -2.5em;
+  text-decoration: none;
+}
+
+.nav-parent:hover .nav-child__wrapper {
+  visibility: visible;
+  opacity: 1;
+  background-color: azure;
+}
+
+/* スライドnavバー */
 .nav__container {
   list-style: none;
   display: flex;

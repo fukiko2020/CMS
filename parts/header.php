@@ -33,9 +33,11 @@
                 // php 形式の値をJSONに変換してJSに渡す（JSで各メニューのIDに合わせてクリックイベントを生成するため）
                 $maxval = json_encode($max);
 
+                print "<ul class='nav-parent__wrapper'>";  // 親メニューのul開始
+
                 for ($i = 0; $i < $max; $i++) {
                     $n = $i + 1;
-                    print "<div id='menu$n'>" . $p_category_name[$i] . "</div>";
+                    print "<li id='menu$n' class='nav-parent'><a href='#'>" . $p_category_name[$i] . "</a>";
 
                     $id = $p_id_list[$i];
 
@@ -45,28 +47,31 @@
                     $data[] = $id;
                     $stmt->execute($data);
 
-                    print "<ul id='menuopen$id'>";
+                    print "<ul id='menu_open$n' class='nav-child__wrapper'>\n";
+                    foreach ($stmt as $rec2) {
 
-                    while (true) {
-                        $rec2 = $stmt->fetch(PDO::FETCH_ASSOC);
+                    // while (true) {
+                        // $rec2 = $stmt->fetch(PDO::FETCH_ASSOC);
                         if (empty($rec2["name"]) === false) {
-                            //print "<li>".$rec2['name']."</li>";
-                            print "<a href='category.php?category=" . $rec2['name'] . "'>";
-                            print "<li>" . $rec2['name'] . "</li>";
-                            print "</a>";
+                            print "<li class='nav-child'>";
+                            print "<a href='category.php?category=" . $rec2["name"] . "'>" . $rec2["name"] . "</a>". "</li>" ;
                         } else {
-                            print "</ul>";
-                            $data = array();
+                            // print "</ul>";
+                            // $data = array();
                             break 1;
                         }
                     }
+                    $data = array();
+                    print "</ul>";  // 子メニューのul閉じタグ
                 }
+                print "</li>";  // 親メニューのli閉じタグ
                 $p_category_name = array();
                 $p_id_list = array();
             } else {
                 $maxval = json_encode(999);
             }
 
+            // 固定記事をnavバーに表示
             $sql = "SELECT title, id FROM kotei WHERE1";
             $stmt = $dbh->prepare($sql);
             $stmt->execute();
@@ -76,9 +81,10 @@
                 if (empty($rec3["title"]) === true) {
                     break;
                 }
-                print "<a href='page.php?kotei=" . $rec3['id'] . "'>";
+                $max += 1;
+                print "<li id=menu$max class='nav-parent'><a href='page.php?kotei=" . $rec3['id'] . "'>";
                 print strip_tags($rec3["title"]);
-                print "</a>";
+                print "</a></li>";
                 print "<br>";
             }
 
@@ -87,7 +93,6 @@
             print "異常";
             print $e;
             exit();
-
         }
 
         ?>
