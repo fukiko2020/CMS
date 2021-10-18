@@ -98,7 +98,7 @@
                             print "<div class='paging__page paging__page--now'>" . $page . "</div>";
                         } else {
                             // 別ページにはリンク付き
-                            print "<div class='paging__page--notnow'><a href='index.php?page=" . $i . "'>";
+                            print "<div class='paging__page paging__page--notnow'><a href='index.php?page=" . $i . "'>";
                             print $i . "</a></div>";
                         }
                     }

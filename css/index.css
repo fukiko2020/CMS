@@ -24,6 +24,7 @@
 
 .blog-card__text {
   width: 100%;
+  height: 9em;
   margin: 0.5em 0 0.5em 1em;
   display: flex;
   flex-direction: column;
@@ -64,10 +65,20 @@
 }
 
 .paging__page--notnow {
-  transition-delay: .1s;
+  transition-duration: .1s;
+}
+
+.paging__page--notnow a {
+  text-decoration: none;
+  color: #333333;
+  transition-duration: .1s;
 }
 
 .paging__page--notnow:hover {
   background-color: #333333;
+}
+
+.paging__page--notnow:hover a {
   color: #efefef;
+
 }
