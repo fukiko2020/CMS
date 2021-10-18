@@ -50,7 +50,7 @@ if (isset($_SESSION["login"]) === false) {
 
     記事を登録しました。
     <br><br>
-    <a href="edit_post.php">記事投稿ページへ戻る</a>
+    <a href="../edit_post.php">記事投稿ページへ戻る</a>
     <a href="cms_top.php">トップメニューへ</a>
 
 </body>

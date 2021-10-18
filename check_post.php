@@ -44,7 +44,7 @@ if (isset($_SESSION["login"]) === false) {
 
     <br><br>
     上記内容で登録しますか？<br><br>
-    <form action="post_done.php" method="post">
+    <form action="cms/post_done.php" method="post">
         <input type="hidden" name="category" value="<?php print $category; ?>">
         <input type="hidden" name="title" value="<?php print $title; ?>">
         <input type="hidden" name="content" value="<?php print $content; ?>">

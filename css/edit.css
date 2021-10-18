@@ -87,6 +87,13 @@ body {
   object-fit: cover;
 }
 
+.preview__content {
+  max-width: 45vw;
+  height: 34em;
+  word-wrap: break-all;
+  overflow: scroll;
+}
+
 /* .edit-form__wrapper { */
   /* display: flex; */
 /* } */
