@@ -16,7 +16,6 @@
     <wrapper>
         <div class="main__wrapper">
 
-            <?php require_once("parts/pankuzu.php"); ?>
 
             <?php
             try {
@@ -105,7 +104,6 @@
                     }
                     print "</div>";
                 } else {
-                    print "<br><br>";
                     print "記事はありません。";
                 }
 
@@ -117,8 +115,6 @@
             }
 
             ?>
-
-            <!-- <?php //require_once("parts/nav.php"); ?> -->
 
         </div>  <!-- main -->
         <?php require_once("parts/side.php"); ?>

@@ -6,15 +6,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>my blog</title>
     <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/index.css">
 </head>
 
-<body class="body__container">
+<body>
+    <div class="body__container">
 
-    <?php require_once("parts/header.php"); ?>
-    <wrapper>
-        <main>
-
-            <?php require_once("parts/pankuzu.php"); ?>
+        <?php require_once("parts/header.php"); ?>
+        <?php require_once("parts/pankuzu.php"); ?>
+        <wrapper>
+        <div class="main__wrapper">
 
             <?php
             try {
@@ -25,6 +26,7 @@
                 $get = sanitize($_GET);
 
                 $category = $get["category"];
+                // print $category;
                 $card_max = 5;
 
                 if (empty($get["page"]) == true) {
@@ -61,13 +63,13 @@
                     $page_max = ceil($card_all / $card_max);
 
                     if ($page === 1) {
-                        $sql = "SELECT id, category, img, title, time FROM post WHERE category=? ORDER BY id DESC LIMIT $now, $card_max";
+                        $sql = "SELECT id, category, img, title, content, created_at FROM post WHERE category=? ORDER BY id DESC LIMIT $now, $card_max";
                         $stmt = $dbh->prepare($sql);
                         $data[] = $category;
                         $stmt->execute($data);
                     } else {
                         $now = $now * $card_max;
-                        $sql = "SELECT id, category, img, title, time FROM post WHERE category=? ORDER BY id DESC LIMIT $now, $card_max";
+                        $sql = "SELECT id, category, img, title, content, created_at FROM post WHERE category=? ORDER BY id DESC LIMIT $now, $card_max";
                         $stmt = $dbh->prepare($sql);
                         $data[] = $category;
                         $stmt->execute($data);
@@ -79,35 +81,38 @@
                         if (empty($rec["title"]) === true) {
                             break;
                         }
-                        print "<div id='blog_card'>";
+                        print "<div class='blog-card__wrapper' id='blog-card__wrapper'>";
                         print "<a class='card' href='post.php?id=" . $rec['id'] . "&category=" . $rec['category'] . "'>";
-                        print "<div id='main_img'>";
+                        print "<div id='main-img' class='blog-card__main-img'>";
                         print "<img src='cms/img/" . $rec['img'] . "'>";
                         print "</div>";
-                        print "<div id='main_text'>";
-                        print "カテゴリ　" . $rec["category"] . "<br>";
-                        print "更新日時　" . $rec["time"] . "<br>";
-                        print "<div class='card_title'>";
-                        print strip_tags($rec["title"]) . "</div><br>";
+                        print "<div id='main_text' class='blog-card__text'>";
+                        print "<div class='blog-card__title'>";
+                        print strip_tags($rec["title"]) . "</div>";
+                        print "<div class='blog-card__content'>" . $rec["content"] . "</div>";
+                        print "<div class='blog-card__subtext'>";
+                        print "<div>カテゴリ: " . $rec["category"] . "</div>";
+                        print "<div>更新日時: " . $rec["created_at"] . "</div>";
+                        print "</div>";
                         print "</div>";
                         print "</a>";
                         print "</div>";
                     }
 
-                    print "<div class='pag'>";
+                    print "<div class='paging__wrapper'>";
                     for ($i = 1; $i <= $page_max; $i++) {
                         if ($i == $page) {
-                            print "<div class='posi'>" . $page . "</div>";
+                            print "<div class='paging__page paging__page--now'>" . $page . "</div>";
                         } else {
-                            print "<div class='posi'><a href='category.php?page=" . $i . "&category=" . $category . "'>";
+                            print "<div class='paging__page paging__page--notnow'><a href='category.php?page=" . $i . "&category=" . $category . "'>";
                             print $i . "</a></div>";
                         }
                     }
                     print "</div>";
                 } else {
-                    print "<br><br>";
-                    print "記事がありません。";
+                    print "<div class='blog-card__nopost'>記事がありません。</div>";
                 }
+                $dbh = null;
             } catch (Exception $e) {
                 print "異常";
                 print $e;
@@ -115,9 +120,7 @@
             }
 
             ?>
-
-            <?php require_once("parts/nav.php"); ?>
-
-        </main>
+        </div>  <!-- main__wrapper -->
         <?php require_once("parts/side.php"); ?>
+        </div> <!-- body__container -->
         <?php require_once("parts/footer.php"); ?>

@@ -8,13 +8,13 @@
     <link rel="stylesheet" href="css/style.css">
 </head>
 
-<body class="body__container">
+<body>
+    <div class="body__container">
 
     <?php require_once("parts/header.php"); ?>
+    <?php require_once("parts/pankuzu.php"); ?>
     <wrapper>
         <main>
-
-            <?php require_once("parts/pankuzu.php"); ?>
 
             <?php
             try {
@@ -89,12 +89,7 @@
                 exit();
             }
             ?>
-
-
-
-
-            <?php require_once("parts/nav.php"); ?>
-
         </main>
         <?php require_once("parts/side.php"); ?>
+        </div> <!-- body__container -->
         <?php require_once("parts/footer.php"); ?>

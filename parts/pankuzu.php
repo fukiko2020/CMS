@@ -4,6 +4,7 @@ try {
     require_once("common/common.php");
     require_once("common/local_settings.php");
 
+    print "<div class='pankuzu__container'>";
     if (empty($_GET["id"]) === true && empty($_GET["category"]) === true && empty($_GET["kotei"]) === true) {
         print "<a href='index.php'>";
         print "home";
@@ -17,6 +18,7 @@ try {
         $dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
         if (isset($get["id"]) === true) {
+            // 記事指定
 
             $sql = "SELECT title, category FROM post WHERE id=?";
             $stmt = $dbh->prepare($sql);
@@ -54,17 +56,18 @@ try {
             print "<a href='index.php'>";
             print "home";
             print "</a>";
-            print "　>　";
+            print "  ≫  ";
             print "<a href='category.php?category=" . $category . "'>";
-            print $p_category . ":" . $category;
+            print $p_category . " - " . $category;
             print "</a>";
-            print "　>　";
+            print "  ≫  ";
             print strip_tags($title);
 
             $p_id = array();
             $title = array();
         } else if (isset($get["category"]) === true) {
-            $sql = "SELECT p_id FROM c_menu WHERE name=?";
+            // カテゴリー指定、記事は指定せず
+            $sql = "SELECT p_id, name FROM c_menu WHERE id=?";
             $stmt = $dbh->prepare($sql);
             $data[] = $get["category"];
             $stmt->execute($data);
@@ -73,6 +76,7 @@ try {
             $rec = $stmt->fetch(PDO::FETCH_ASSOC);
 
             $p_id = $rec["p_id"];
+            $c_category = $rec["name"];
 
             $sql = "SELECT name FROM p_menu WHERE id=?";
             $stmt = $dbh->prepare($sql);
@@ -89,14 +93,14 @@ try {
             print "<a href='index.php'>";
             print "home";
             print "</a>";
-            print "　>　";
+            print "  ≫  ";
             print "<a href='category.php?category=" . $get['category'] . "'>";
-            print $p_category . ":" . $get["category"];
+            print $p_category . " - " . $c_category;
             print "</a>";
-            //print "　>　";
 
             $o_code = array();
         } else {
+            // 固定記事
             $sql = "SELECT title FROM kotei WHERE id=?";
             $stmt = $dbh->prepare($sql);
             $data[] = $get["kotei"];
@@ -108,10 +112,12 @@ try {
             print "<a href='index.php'>";
             print "home";
             print "</a>";
-            print "　>　";
+            print "  ≫  ";
             print strip_tags($rec["title"]);
         }
     }
+    print "</div>";
+
 } catch (Exception $e) {
     print "異常";
     print $e;
