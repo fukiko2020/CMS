@@ -13,6 +13,7 @@ body {
 /* ヘッダー */
 .header__container {
   display: inline;
+  text-align: center;
 }
 
 /* ヘッダー navバー */
@@ -23,17 +24,14 @@ body {
 
 .nav-parent {
   display: inline-block;
-  /* padding: 5px 10px; */
-  margin: 0 5px;
+  padding: 0 1em;
   vertical-align: top;
   position: relative;
   transition: all .2s linear .2s;
 }
 
-.nav-parent a {
+.nav-parent > a {
   display: block;
-  /* padding: 0 1.5em; */
-  margin: 0 1.5em;
   width: 100%;
   color: #333333;
   text-decoration: none;
@@ -41,7 +39,7 @@ body {
 }
 
 .nav-parent:hover {
-  background-color: azure;
+  background-color: #efefef;
 }
 
 .nav-parent:hover > a {
@@ -49,7 +47,8 @@ body {
 }
 
 .nav-child__wrapper {
-  width: 5em;
+  width: 7em;
+  padding: 0;
   list-style: none;
   visibility: hidden;
   transition: all .2s linear .2s;
@@ -61,16 +60,15 @@ body {
 }
 
 .nav-child a {
-  position: relative;
-  top: 0;
-  left: -2.5em;
+  width: 100%;
+  color: #333333;
   text-decoration: none;
 }
 
 .nav-parent:hover .nav-child__wrapper {
   visibility: visible;
   opacity: 1;
-  background-color: azure;
+  background-color: #efefef;
 }
 
 /* スライドnavバー */
@@ -111,7 +109,7 @@ body {
   left: -40%;
   width: -40%;
   height: 100vh;
-  background-color: azure;
+  background-color: #efefef;
   transition: .7s;
 }
 
@@ -216,3 +214,5 @@ wrapper {
   text-decoration: none;
   color: #333333;
 }
+
+/* フッターここに記事の内容が入ります */

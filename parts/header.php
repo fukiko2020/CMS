@@ -3,7 +3,7 @@
     <header class="header__container">
         <h1 class="header__title"><a href="index.php">my blog</a></h1>
         <h2 class="header__subtitle">ブログサブタイトル</h2>
-        <p id="target">menu</p>
+        <!-- <p id="target">menu</p> -->
 
         <?php
         try {
@@ -82,7 +82,7 @@
                     break;
                 }
                 $max += 1;
-                print "<li id=menu$max class='nav-parent'><a href='page.php?kotei=" . $rec3['id'] . "'>";
+                print "<li id=menu$max class='nav-parent'><a href='kotei.php?kotei=" . $rec3['id'] . "'>";
                 print strip_tags($rec3["title"]);
                 print "</a></li>";
                 print "<br>";
