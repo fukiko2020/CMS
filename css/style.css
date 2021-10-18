@@ -1,4 +1,6 @@
 body {
+  display: flex;
+  flex-direction: column;
   margin: 0;
   box-sizing: border-box;
   color: #333333;
@@ -216,3 +218,20 @@ wrapper {
 }
 
 /* フッターここに記事の内容が入ります */
+footer {
+  width: 100%;
+  background-color: #efefef;
+}
+
+.footer__container {
+  margin: 30px;
+}
+
+.footer__container h3 {
+  text-align: center;
+}
+
+.footer__copyright {
+  display: block;
+  text-align: center;
+}

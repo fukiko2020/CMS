@@ -9,7 +9,8 @@
     <link rel="stylesheet" href="css/index.css">
 </head>
 
-<body class="body__container">
+<body>
+    <div class="body__container">
 
     <?php require_once("parts/header.php"); ?>
     <wrapper>
@@ -121,4 +122,5 @@
 
         </div>  <!-- main -->
         <?php require_once("parts/side.php"); ?>
+        </div> <!-- body__container -->
         <?php require_once("parts/footer.php"); ?>
