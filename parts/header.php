@@ -42,7 +42,7 @@
                     $id = $p_id_list[$i];
 
                     // $p_category_name[$i] の子メニュー取得
-                    $sql = "SELECT name FROM c_menu WHERE p_id=?";
+                    $sql = "SELECT id, name FROM c_menu WHERE p_id=?";
                     $stmt = $dbh->prepare($sql);
                     $data[] = $id;
                     $stmt->execute($data);
@@ -54,7 +54,7 @@
                         // $rec2 = $stmt->fetch(PDO::FETCH_ASSOC);
                         if (empty($rec2["name"]) === false) {
                             print "<li class='nav-child'>";
-                            print "<a href='category.php?category=" . $rec2["name"] . "'>" . $rec2["name"] . "</a>". "</li>" ;
+                            print "<a href='category.php?category=" . $rec2["id"] . "'>" . $rec2["name"] . "</a>". "</li>" ;
                         } else {
                             // print "</ul>";
                             // $data = array();
@@ -85,7 +85,6 @@
                 print "<li id=menu$max class='nav-parent'><a href='kotei.php?kotei=" . $rec3['id'] . "'>";
                 print strip_tags($rec3["title"]);
                 print "</a></li>";
-                print "<br>";
             }
 
             $dbh = null;

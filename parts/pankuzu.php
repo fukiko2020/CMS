@@ -31,7 +31,7 @@ try {
             $category = $rec["category"];
             $title = $rec["title"];
 
-            $sql = "SELECT p_id FROM c_menu WHERE id=?";
+            $sql = "SELECT p_id, name FROM c_menu WHERE id=?";
             $stmt = $dbh->prepare($sql);
             $data[] = $category;
             $stmt->execute($data);
@@ -40,6 +40,7 @@ try {
             $rec = $stmt->fetch(PDO::FETCH_ASSOC);
 
             $p_id = $rec["p_id"];
+            $c_name = $rec["name"];
 
             $sql = "SELECT name FROM p_menu WHERE id=?";
             $stmt = $dbh->prepare($sql);
@@ -56,9 +57,9 @@ try {
             print "<a href='index.php'>";
             print "home";
             print "</a>";
-            print "  ≫  ";
+            print "  &raquo;  ";
             print "<a href='category.php?category=" . $category . "'>";
-            print $p_category . " - " . $category;
+            print $p_category . " - " . $c_name;
             print "</a>";
             print "  ≫  ";
             print strip_tags($title);
@@ -93,7 +94,7 @@ try {
             print "<a href='index.php'>";
             print "home";
             print "</a>";
-            print "  ≫  ";
+            print "  &raquo;  ";
             print "<a href='category.php?category=" . $get['category'] . "'>";
             print $p_category . " - " . $c_category;
             print "</a>";
@@ -112,7 +113,7 @@ try {
             print "<a href='index.php'>";
             print "home";
             print "</a>";
-            print "  ≫  ";
+            print "  &raquo;  ";
             print strip_tags($rec["title"]);
         }
     }

@@ -249,3 +249,14 @@ footer {
   display: block;
   text-align: center;
 }
+
+.form__btns--green {
+  width: 8em;
+  margin-bottom: 60px;
+  height: 2em;
+  font-size: 1.2em;
+  background-color: #00c300;
+  border: 1px solid #00c300;
+  color: #ffffff;
+  border-radius: 10px;
+}

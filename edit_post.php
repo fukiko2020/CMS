@@ -29,7 +29,7 @@ if (isset($_SESSION["login"]) === false) {
         $dbh = new PDO($dsn, $user, $password);
         $dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-        $sql = "SELECT id, name FROM c_menu WHERE1";
+        // $sql = "SELECT id, name FROM c_menu WHERE1";
         $sql = "SELECT p_menu.id AS p_id, p_menu.name AS p_name, c_menu.id AS c_id, c_menu.name AS c_name FROM p_menu INNER JOIN c_menu ON p_menu.id = c_menu.p_id";
         $stmt = $dbh->prepare($sql);
         $stmt->execute();
