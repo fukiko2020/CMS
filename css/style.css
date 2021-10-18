@@ -23,7 +23,8 @@ body {
 
 .nav-parent {
   display: inline-block;
-  padding: 5px 0;
+  /* padding: 5px 10px; */
+  margin: 0 5px;
   vertical-align: top;
   position: relative;
   transition: all .2s linear .2s;
@@ -31,9 +32,11 @@ body {
 
 .nav-parent a {
   display: block;
-  padding: 0 1.5em;
-  text-decoration: none;
+  /* padding: 0 1.5em; */
+  margin: 0 1.5em;
+  width: 100%;
   color: #333333;
+  text-decoration: none;
   border-bottom: 1px solid #333333;
 }
 
