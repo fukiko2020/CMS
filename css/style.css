@@ -141,7 +141,10 @@ wrapper {
 }
 
 .main__wrapper {
+  width: calc(100% - 360px);
   border: 1px solid #efefef;
+  border-right: none;
+  border-bottom: none;
 }
 
 .side__wrapper {

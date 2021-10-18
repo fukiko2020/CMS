@@ -1,0 +1,73 @@
+/* ブログカード１つ１つ */
+.blog-card__wrapper {
+  margin: 1.5em;
+  border-bottom: 1px solid #efefef;
+  /* display: flex; */
+}
+
+.main__wrapper div:nth-last-child(2) {
+  border: none;
+}
+
+.blog-card__wrapper a {
+  margin-bottom: 1em;
+  display: flex;
+  text-decoration: none;
+  color: #333333;
+}
+
+.blog-card__main-img img {
+  width: 10em;
+  height: 10em;
+  object-fit: contain;
+}
+
+.blog-card__text {
+  width: 100%;
+  margin: 0.5em 0 0.5em 1em;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+.blog-card__title {
+  font-size: 1.5em;
+}
+
+.blog-card__content {
+  font-size: 1em;
+  overflow: hidden;
+}
+
+.blog-card__subtext {
+  font-size: 0.8em;
+}
+
+.paging__wrapper {
+  height: 2em;
+  padding: 0.5em 0;
+  display: flex;
+  justify-content: center;
+  border-top: 1px solid #efefef;
+}
+
+.paging__page {
+  width: 2em;
+  padding-top: 0.3em;
+  text-align: center;
+}
+
+.paging__page--now {
+  background-color: #333333;
+  color: #efefef;
+}
+
+.paging__page--notnow {
+  transition-delay: .1s;
+}
+
+.paging__page--notnow:hover {
+  background-color: #333333;
+  color: #efefef;
+}

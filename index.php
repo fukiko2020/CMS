@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>my blog</title>
     <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/index.css">
 </head>
 
 <body class="body__container">
@@ -57,12 +58,12 @@
                     $page_max = ceil($card_all / $card_max);  // ページ数
 
                     if ($page === 1) {
-                        $sql = "SELECT id, category, img, title, created_at FROM post ORDER BY id DESC LIMIT $now, $card_max";
+                        $sql = "SELECT id, category, img, title, content, created_at FROM post ORDER BY id DESC LIMIT $now, $card_max";
                         $stmt = $dbh->prepare($sql);
                         $stmt->execute();
                     } else {
                         $now = $now * $card_max;
-                        $sql = "SELECT id, category, img, title, created_at FROM post ORDER BY id DESC LIMIT $now, $card_max";
+                        $sql = "SELECT id, category, img, title, content, created_at FROM post ORDER BY id DESC LIMIT $now, $card_max";
                         $stmt = $dbh->prepare($sql);
                         $stmt->execute();
                     }
@@ -72,31 +73,32 @@
                         if (empty($rec["title"]) === true) {
                             break;
                         }
-                        print "<hr>";
-                        print "<div id='blog_card'>";
+                        print "<div class='blog-card__wrapper' id='blog-card__wrapper'>";
                         print "<a class='card' href='post.php?id=" . $rec['id'] . "'>";
-                        print "<div id='main_img'>";
+                        print "<div id='main-img' class='blog-card__main-img'>";
                         print "<img src='cms/img/" . $rec['img'] . "'>";
                         print "</div>";
-                        print "<div id='main_text'>";
-                        print "カテゴリ　" . $rec["category"] . "<br>";
-                        print "更新日　" . $rec["created_at"] . "<br>";
-                        print "<div class='card_title'>";
-                        print strip_tags($rec["title"]) . "</div><br>";
+                        print "<div id='main_text' class='blog-card__text'>";
+                        print "<div class='blog-card__title'>";
+                        print strip_tags($rec["title"]) . "</div>";
+                        print "<div class='blog-card__content'>" . $rec["content"] . "</div>";
+                        print "<div class='blog-card__subtext'>";
+                        print "<div>カテゴリ: " . $rec["category"] . "</div>";
+                        print "<div>更新日: " . $rec["created_at"] . "</div>";
+                        print "</div>";
                         print "</div>";
                         print "</a>";
                         print "</div>";
-                        print "<hr>";
                     }
 
-                    print "<div class='pag'>";
+                    print "<div class='paging__wrapper'>";
                     for ($i = 1; $i <= $page_max; $i++) {
                         if ($i == $page) {
                             // 今いるページにはリンクなし
-                            print "<div class='posi'>" . $page . "</div>";
+                            print "<div class='paging__page paging__page--now'>" . $page . "</div>";
                         } else {
                             // 別ページにはリンク付き
-                            print "<div class='posi'><a href='index.php?page=" . $i . "'>";
+                            print "<div class='paging__page--notnow'><a href='index.php?page=" . $i . "'>";
                             print $i . "</a></div>";
                         }
                     }
@@ -115,7 +117,7 @@
 
             ?>
 
-            <?php require_once("parts/nav.php"); ?>
+            <!-- <?php //require_once("parts/nav.php"); ?> -->
 
         </div>  <!-- main -->
         <?php require_once("parts/side.php"); ?>
