@@ -2,7 +2,6 @@
 .blog-card__wrapper {
   margin: 1.5em;
   border-bottom: 1px solid #efefef;
-  /* display: flex; */
 }
 
 .main__wrapper div:nth-last-child(2) {
@@ -45,6 +44,10 @@
   font-size: 0.8em;
 }
 
+.blog-card__nopost {
+  margin: 30px;
+}
+
 .paging__wrapper {
   height: 2em;
   padding: 0.5em 0;
@@ -80,5 +83,4 @@
 
 .paging__page--notnow:hover a {
   color: #efefef;
-
 }

@@ -119,19 +119,20 @@
                     }
                     print "</div>";
 
-                    print "<div class='comment-form__wrapper'>";
-                    print "<h3>コメントを残す</h3>";
-                    print "<form action='comment.php' method='post' class='comment__form'>";
-                    print "<label for='name'><span>お名前</span>";
-                    print "<input type='text' name='name' class='comment-form__item'></label>";
-                    print "<br>";
-                    print "<label for='comment'><span class='comment-content__label'>コメント</span>";
-                    print "<textarea name='comment' class='comment-form__item'></textarea></label>";
-                    print "<input type='hidden' name='id' value='" . $id . "'>";
-                    print "<input type='hidden' name='title' value='" . $this_title . "'>";
-                    print "<button type='submit' class='form__btns--green'>送信</button>";
-                    print "</form>";
-                    print "</div>";
+                    // print "<div class='comment-form__wrapper'>";
+                    // print "<h3>コメントを残す</h3>";
+                    // print "<form action='comment.php' method='post' class='comment__form'>";
+                    // print "<label for='name'><span>お名前</span>";
+                    // print "<input type='text' name='name' class='comment-form__item'></label>";
+                    // print "<br>";
+                    // print "<label for='comment'><span class='comment-content__label'>コメント</span>";
+                    // print "<textarea name='comment' class='comment-form__item'></textarea></label>";
+                    // print "<input type='hidden' name='id' value='" . $id . "'>";
+                    // print "<input type='hidden' name='title' value='" . $this_title . "'>";
+                    // print "<br>";
+                    // print "<button type='submit' class='form__btns--green'>送信</button>";
+                    // print "</form>";
+                    // print "</div>";
 
                     print "<div class='comment-list__wrapper'>";
                     print "<h3>コメント一覧</h3>";
@@ -166,6 +167,21 @@
                             print "</div>";
                         }
                     }
+                    print "</div>";
+
+                    print "<div class='comment-form__wrapper'>";
+                    print "<h3>コメントを残す</h3>";
+                    print "<form action='comment.php' method='post' class='comment__form'>";
+                    print "<label for='name'><span>お名前</span>";
+                    print "<input type='text' name='name' class='comment-form__item'></label>";
+                    print "<br>";
+                    print "<label for='comment'><span class='comment-content__label'>コメント</span>";
+                    print "<textarea name='comment' class='comment-form__item'></textarea></label>";
+                    print "<input type='hidden' name='id' value='" . $id . "'>";
+                    print "<input type='hidden' name='title' value='" . $this_title . "'>";
+                    print "<br>";
+                    print "<button type='submit' class='form__btns--green'>送信</button>";
+                    print "</form>";
                     print "</div>";
                 } catch (Exception $e) {
                     print "異常";
